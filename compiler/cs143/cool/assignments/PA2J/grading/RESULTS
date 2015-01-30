@@ -1,0 +1,15 @@
+	-1 (eofstring)	  eof in a string
+	-1 (escapedeof)	 escaped eof in a string
+	-1 (escapednull)	 escaped null char in a string
+	-1 (escapedquote)	 escaped quote
+	-1 (lineno3)	 line number test 3
+	-1 (longstring_escapedbackslashes)	 long strings with escaped characters
+	-1 (null_in_string)	 null char in string
+	-1 (null_in_string_followed_by_tokens)	 null char in string, then tokens
+	-1 (null_in_string_unescaped_newline)	 null and unescaped newline in string
+	-1 (opencomment)	 no matching closing comment [submission crashed on this input]
+	-1 (pathologicalstrings)	 some pathological strings
+	-1 (s04)	 different types of whitespaces
+	-1 (s05)	 whitespaces in string
+	-1 (s33)	 unterminated comment [submission crashed on this input]
+	-1 (wq0607-c4)	 sequence of quotes, backslashes, and double-dash comment symbols [submission crashed on this input]

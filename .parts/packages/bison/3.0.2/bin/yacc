@@ -1,0 +1,2 @@
+#! /bin/sh
+exec '/home/action/.parts/packages/bison/3.0.2/bin/bison' -y "$@"
