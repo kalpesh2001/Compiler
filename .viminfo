@@ -8,11 +8,15 @@
 # hlsearch on (H) or off (h):
 ~h
 # Last Search Pattern:
-~MSle0~/initialize
+~MSle0~/static_class
 
 # Command Line History (newest to oldest):
 :w
+:1
+:860
 :q!
+:1382
+:1192
 :546
 :679
 :472
@@ -36,7 +40,6 @@
 :105
 :w SymtabExample_test
 :183
-:1
 :267
 :80
 :w newgood.cl
@@ -58,25 +61,33 @@
 :173
 :172
 :171
-:175
-:157
-:74
 
 # Search String History (newest to oldest):
-?/initialize
+?/static_class
 ?/dispatch
+?/method
+?/initialize
+?/addGlobal
+?/addAttr
+?/attr
 ?/semant
+?/EXPR
+?/set_
+?/return_type
+?/set_type
+?/self
+?/methodparam
+?/length
+?/lenght
 ?/let
 ?/no_expr
 ?/cond
 ?/Foo
 ?/loop
-?/set_type
 ?/class_c
 ?/set
 ?/eq
 ?/compare
-?/addAttr
 ?/ancestor
 ?/_attr
 ?/_fo/_attr
@@ -86,11 +97,9 @@
 ?/equality
 ?/plus
 ?/assign
-?/attr
 ?/assing
 ?/formal
 ?/checkType
-?/method
 ?/enterScope
 ?/a4
 ?/String
@@ -102,17 +111,8 @@
 ?/out_
 ?/added
 ?/method not added
-?/return_type
 ?/Feature
 ?/class_
-?/typeCheck
-?/Class_
-?/Classes
-?/getParent
-?/semnant
-?/Constant
-?/Constatn
-?/Type
 
 # Expression History (newest to oldest):
 
@@ -122,145 +122,547 @@
 
 # Registers:
 "0	LINE	0
-	      set_type(TreeConstants.typeError);
-""1	LINE	0
-	Add method: substr
+	            set_type(TreeConstants.typeError);
+	            return(TreeConstants.typeError);
+"1	LINE	0
+	    Node<AbstractSymbol> called_node = node.findNode(called_class);
 "2	LINE	0
-	Add method: concat
+	  }
 "3	LINE	0
-	Add method: length
+	      }
 "4	LINE	0
-	Add method: in_int
+	      }
+	     
 "5	LINE	0
-	Add method: in_string
+	      return(TreeConstants.typeError);
 "6	LINE	0
-	Method not added: out_int
+	      set_type(TreeConstants.typeError);
 "7	LINE	0
-	Method not added: out_string
+	      if (called_class == TreeConstants.typeError) {
 "8	LINE	0
-	Method not added: copy
+	         called_class = classname;
 "9	LINE	0
-	Add method: type_name
-"-	CHAR	0
-	r
+	     if (called_class == TreeConstants.No_type) 
+""-	CHAR	0
+	class 
 
 # File marks:
-'0  15  4  ~/assign4/Node.java
-'1  814  4  ~/assign4/cool-tree.java
-'2  279  46  ~/assign4/cool-tree.java
-'3  1  0  ~/assign4/out
-'4  8  0  ~/assign4/grading/scopes.test
-'5  1  0  ~/assign4/grading/scopes.test
-'6  1  0  ~/assign4/grading/nomain.test.out
-'7  1  0  ~/assign4/grading/nomain.test
-'8  1  0  ~/assign4/grading/nomain.tets
-'9  55  0  ~/assign4/out
+'0  28  0  ~/assign4/out
+'1  45  2  ~/assign4/out
+'2  1  0  ~/assign4/grading/staticdispatch.test
+'3  816  57  ~/assign4/cool-tree.java
+'4  1  0  ~/assign4/cool-tree.java
+'5  1  0  ~/assign4/out
+'6  1  0  ~/assign4/grading/overridingmethod4.test
+'7  1  0  ~/assign4/grading/overridingmethod4.test.out
+'8  49  0  ~/assign4/out
+'9  30  8  ~/assign4/grading/overridingmethod3.test.out
 
 # Jumplist (newest first):
--'  15  4  ~/assign4/Node.java
--'  1  0  ~/assign4/Node.java
--'  814  4  ~/assign4/cool-tree.java
--'  742  48  ~/assign4/cool-tree.java
--'  732  45  ~/assign4/cool-tree.java
--'  729  26  ~/assign4/cool-tree.java
--'  721  18  ~/assign4/cool-tree.java
--'  713  24  ~/assign4/cool-tree.java
--'  708  13  ~/assign4/cool-tree.java
--'  705  36  ~/assign4/cool-tree.java
--'  1  0  ~/assign4/cool-tree.java
--'  279  46  ~/assign4/cool-tree.java
--'  20  25  ~/assign4/cool-tree.java
+-'  28  0  ~/assign4/out
 -'  1  0  ~/assign4/out
--'  8  0  ~/assign4/grading/scopes.test
--'  1  0  ~/assign4/grading/scopes.test
--'  1  0  ~/assign4/grading/nomain.test.out
--'  1  0  ~/assign4/grading/nomain.test
--'  1  0  ~/assign4/grading/nomain.tets
--'  55  0  ~/assign4/out
--'  44  0  ~/assign4/out
--'  1  0  ~/assign4/grading/letnoinit.test
--'  3  8  ~/assign4/out
--'  101  0  ~/assign4/Makefile
+-'  45  2  ~/assign4/out
+-'  1  0  ~/assign4/grading/staticdispatch.test
+-'  816  57  ~/assign4/cool-tree.java
+-'  1  0  ~/assign4/cool-tree.java
+-'  828  2  ~/assign4/cool-tree.java
+-'  731  41  ~/assign4/cool-tree.java
+-'  829  2  ~/assign4/cool-tree.java
+-'  777  102  ~/assign4/cool-tree.java
+-'  788  4  ~/assign4/cool-tree.java
+-'  1  0  ~/assign4/grading/overridingmethod4.test
+-'  1  0  ~/assign4/grading/overridingmethod4.test.out
+-'  49  0  ~/assign4/out
+-'  30  8  ~/assign4/grading/overridingmethod3.test.out
+-'  1  0  ~/assign4/grading/overridingmethod3.test.out
+-'  1  0  ~/assign4/grading/overridingmethod3.test
+-'  7  0  ~/assign4/grading/overridingmethod2.test
+-'  1  0  ~/assign4/grading/overridingmethod2.test
+-'  1  0  ~/assign4/grading/overrideingmethod2.test
+-'  50  0  ~/assign4/Methods.java
+-'  1  0  ~/assign4/Methods.java
+-'  291  7  ~/assign4/cool-tree.java
+-'  464  29  ~/assign4/cool-tree.java
+-'  283  41  ~/assign4/cool-tree.java
+-'  253  13  ~/assign4/cool-tree.java
+-'  469  39  ~/assign4/cool-tree.java
+-'  912  8  ~/assign4/cool-tree.java
+-'  910  12  ~/assign4/cool-tree.java
+-'  908  40  ~/assign4/cool-tree.java
+-'  896  36  ~/assign4/cool-tree.java
+-'  886  90  ~/assign4/cool-tree.java
+-'  885  12  ~/assign4/cool-tree.java
+-'  842  6  ~/assign4/cool-tree.java
+-'  675  4  ~/assign4/cool-tree.java
+-'  449  29  ~/assign4/cool-tree.java
+-'  448  22  ~/assign4/cool-tree.java
+-'  447  13  ~/assign4/cool-tree.java
+-'  442  14  ~/assign4/cool-tree.java
+-'  439  11  ~/assign4/cool-tree.java
+-'  438  14  ~/assign4/cool-tree.java
+-'  364  36  ~/assign4/cool-tree.java
+-'  362  14  ~/assign4/cool-tree.java
+-'  284  3  ~/assign4/cool-tree.java
+-'  1  0  ~/assign4/grading/cool-tree.java
+-'  1  0  ~/assign4/grading/badarith.test
+-'  905  29  ~/assign4/cool-tree.java
+-'  916  4  ~/assign4/cool-tree.java
+-'  890  69  ~/assign4/cool-tree.java
+-'  730  36  ~/assign4/cool-tree.java
+-'  59  0  ~/assign4/cool-tree.java
+-'  925  0  ~/assign4/cool-tree.java
+-'  917  44  ~/assign4/cool-tree.java
+-'  733  13  ~/assign4/cool-tree.java
+-'  60  0  ~/assign4/Makefile
 -'  1  0  ~/assign4/Makefile
--'  1093  25  ~/assign4/cool-tree.java
--'  1081  9  ~/assign4/cool-tree.java
--'  1084  5  ~/assign4/cool-tree.java
--'  1067  24  ~/assign4/cool-tree.java
--'  266  17  ~/assign4/cool-tree.java
--'  254  20  ~/assign4/cool-tree.java
--'  1691  0  ~/assign4/cool-tree.java
--'  1073  6  ~/assign4/cool-tree.java
--'  4  0  ~/assign4/grading/methodnameclash.test
--'  1  0  ~/assign4/grading/methodnameclash.test
--'  872  0  ~/assign4/cool-tree.java
--'  265  41  ~/assign4/cool-tree.java
--'  210  4  ~/assign4/ClassTable.java
--'  1  0  ~/assign4/ClassTable.java
--'  1  0  ~/assign4/grading/forwardinherits.test
--'  1  1  ~/assign4/grading/forwardinherits.test.out
--'  9  15  ~/assign4/grading/compare.test
--'  1  0  ~/assign4/grading/compare.test
--'  1  0  ~/assign4/grading/assignnoconform.test.out
--'  1  0  ~/assign4/grading/assignmentnoconform.test.out
--'  1  0  ~/assign4/grading/assignment.test
--'  55  10  ~/assign4/grading/assignment.test.out
--'  1  0  ~/assign4/grading/assignment.test.out
--'  65  12  ~/assign4/grading/assignment.test.out
--'  26  6  ~/assign4/grading/assignment.test.out
--'  80  4  ~/assign4/grading/assignment.test.out
--'  68  8  ~/assign4/grading/assignment.test.out
--'  67  10  ~/assign4/grading/assignment.test.out
--'  66  12  ~/assign4/grading/assignment.test.out
--'  1  0  ~/assign4/grading/comparisons.test
--'  916  2  ~/assign4/cool-tree.java
--'  913  13  ~/assign4/cool-tree.java
--'  914  4  ~/assign4/cool-tree.java
--'  1016  4  ~/assign4/cool-tree.java
--'  1225  12  ~/assign4/cool-tree.java
--'  30  4  ~/assign4/cool-tree.java
--'  1465  2  ~/assign4/cool-tree.java
--'  1782  10  ~/assign4/cool-tree.java
--'  1744  9  ~/assign4/cool-tree.java
--'  1711  9  ~/assign4/cool-tree.java
--'  1673  42  ~/assign4/cool-tree.java
--'  64  0  ~/assign4/cool-tree.java
--'  64  1  ~/assign4/grading/comparisons.test.out
--'  1  0  ~/assign4/grading/comparisons.test.out
--'  1  0  ~/assign4/grading/comparisions.test
--'  379  4  ~/assign4/cool-tree.java
--'  288  24  ~/assign4/cool-tree.java
--'  277  77  ~/assign4/cool-tree.java
--'  1422  36  ~/assign4/cool-tree.java
--'  283  13  ~/assign4/cool-tree.java
--'  1526  29  ~/assign4/cool-tree.java
--'  399  4  ~/assign4/cool-tree.java
--'  451  14  ~/assign4/cool-tree.java
--'  368  36  ~/assign4/cool-tree.java
--'  366  14  ~/assign4/cool-tree.java
--'  293  38  ~/assign4/cool-tree.java
--'  70  25  ~/assign4/cool-tree.java
--'  1  0  ~/assign4/grading/out
--'  22  8  ~/assign4/grading/compare.test.out
--'  1  0  ~/assign4/grading/compare.test.out
--'  1790  7  ~/assign4/cool-tree.java
--'  1788  48  ~/assign4/cool-tree.java
--'  522  66  ~/assign4/cool-tree.java
--'  292  118  ~/assign4/cool-tree.java
--'  264  58  ~/assign4/cool-tree.java
--'  258  31  ~/assign4/cool-tree.java
--'  253  46  ~/assign4/cool-tree.java
--'  146  4  ~/assign4/cool-tree.java
--'  284  8  ~/assign4/cool-tree.java
--'  290  43  ~/assign4/cool-tree.java
--'  289  55  ~/assign4/cool-tree.java
--'  199  0  ~/assign4/ClassTable.java
--'  1  0  ~/ClassTable.java
--'  131  7  ~/assign4/Node.java
+-'  539  3  ~/assign4/cool-tree.java
+-'  455  14  ~/assign4/cool-tree.java
+-'  375  8  ~/assign4/cool-tree.java
+-'  294  60  ~/assign4/cool-tree.java
+-'  221  0  ~/assign4/cool-tree.java
+-'  158  25  ~/assign4/cool-tree.java
+-'  300  58  ~/assign4/cool-tree.java
+-'  299  26  ~/assign4/cool-tree.java
+-'  50  4  ~/assign4/cool-tree.java
+-'  297  9  ~/assign4/cool-tree.java
+-'  282  46  ~/assign4/cool-tree.java
+-'  20  25  ~/assign4/cool-tree.java
+-'  279  12  ~/assign4/cool-tree.java
+-'  51  0  ~/assign4/out
+-'  459  50  ~/assign4/cool-tree.java
+-'  474  7  ~/assign4/cool-tree.java
+-'  383  29  ~/assign4/cool-tree.java
+-'  1845  4  ~/assign4/cool-tree.java
+-'  431  25  ~/assign4/cool-tree.java
+-'  7  0  ~/assign4/grading/dispatch.test
+-'  1  0  ~/assign4/grading/dispatch.test
+-'  8  0  ~/assign4/grading/dispatch.test
+-'  1  0  garding/dispatch.test
+-'  46  0  ~/assign4/out
+-'  491  6  ~/assign4/cool-tree.java
+-'  146  22  ~/assign4/cool-tree.java
+-'  2  0  ~/assign4/cool-tree.java
+-'  1218  14  ~/assign4/cool-tree.java
+-'  1217  15  ~/assign4/cool-tree.java
+-'  1210  7  ~/assign4/cool-tree.java
+-'  1209  19  ~/assign4/cool-tree.java
+-'  482  14  ~/assign4/cool-tree.java
+-'  416  0  ~/assign4/cool-tree.java
+-'  1450  41  ~/assign4/cool-tree.java
+-'  62  39  ~/assign4/TreeConstants.java
+-'  1  0  ~/assign4/TreeConstants.java
+-'  5  0  ~/assign4/grading/dispatch.test
+-'  16  0  ~/assign4/grading/dispatch.test
+-'  2  18  ~/assign4/grading/basic.test
+-'  1  0  ~/assign4/grading/basic.test
+-'  25  8  ~/assign4/grading/newselftype.test.out
+-'  1  0  ~/assign4/grading/newselftype.test.out
 
 # History of marks within files (newest to oldest):
 
+> ~/assign4/out
+	"	28	0
+	.	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+
+> ~/assign4/grading/staticdispatch.test
+	"	1	0
+
+> ~/assign4/cool-tree.java
+	"	816	57
+	^	816	57
+	.	816	57
+	+	1590	98
+	+	1632	99
+	+	1633	41
+	+	1677	99
+	+	1713	99
+	+	1753	99
+	+	1790	99
+	+	1834	99
+	+	1867	99
+	+	1904	99
+	+	69	109
+	+	459	41
+	+	1247	98
+	+	1437	41
+	+	464	66
+	+	474	42
+	+	476	5
+	+	474	0
+	+	482	28
+	+	486	5
+	+	477	0
+	+	474	0
+	+	482	0
+	+	486	0
+	+	459	64
+	+	464	68
+	+	474	80
+	+	464	0
+	+	474	0
+	+	464	81
+	+	459	50
+	+	464	0
+	+	294	60
+	+	291	0
+	+	283	0
+	+	533	1
+	+	535	2
+	+	536	36
+	+	539	3
+	+	909	1
+	+	911	1
+	+	924	0
+	+	925	45
+	+	926	36
+	+	925	44
+	+	926	37
+	+	463	23
+	+	464	0
+	+	463	36
+	+	463	35
+	+	464	89
+	+	469	28
+	+	468	10
+	+	464	10
+	+	468	46
+	+	466	43
+	+	467	8
+	+	468	47
+	+	469	66
+	+	470	8
+	+	472	7
+	+	468	39
+	+	913	70
+	+	914	35
+	+	917	13
+	+	920	9
+	+	878	71
+	+	880	10
+	+	877	0
+	+	878	47
+	+	880	0
+	+	829	0
+	+	778	0
+	+	788	0
+	+	781	0
+	+	829	0
+	+	779	75
+	+	780	71
+	+	782	61
+	+	787	7
+	+	784	7
+	+	785	7
+	+	786	6
+	+	794	4
+	+	795	5
+	+	796	5
+	+	797	5
+	+	798	5
+	+	800	5
+	+	799	5
+	+	800	5
+	+	801	5
+	+	802	5
+	+	804	83
+	+	816	26
+	+	817	30
+	+	816	154
+	+	816	29
+	+	817	27
+	+	816	57
+
+> ~/assign4/grading/overridingmethod.test.out
+	"	47	4
+
+> ~/assign4/grading/overridingmethod.test
+	"	1	0
+
+> ~/assign4/grading/overridingmethod4.test
+	"	1	0
+
+> ~/assign4/grading/overridingmethod4.test.out
+	"	1	0
+
+> ~/assign4/grading/overridingmethod3.test.out
+	"	30	8
+
+> ~/assign4/grading/overridingmethod3.test
+	"	1	0
+
+> ~/assign4/grading/overridingmethod2.test
+	"	7	0
+
+> ~/assign4/grading/overrideingmethod2.test
+	"	1	0
+
+> ~/assign4/Methods.java
+	"	50	0
+	^	40	2
+	.	18	0
+	+	8	96
+	+	11	30
+	+	11	12
+	+	8	89
+	+	11	27
+	+	55	18
+	+	13	17
+	+	55	0
+	+	15	48
+	+	14	35
+	+	15	0
+	+	16	0
+	+	16	0
+	+	18	0
+	+	55	32
+	+	22	0
+	+	55	0
+	+	22	26
+	+	20	73
+	+	23	44
+	+	54	7
+	+	23	4
+	+	23	4
+	+	33	20
+	+	33	60
+	+	33	1
+	+	36	0
+	+	15	49
+	+	23	48
+	+	33	74
+	+	33	21
+	+	19	1
+	+	11	1
+	+	33	1
+	+	8	15
+	+	11	0
+	+	9	0
+	+	10	0
+	+	9	0
+	+	10	0
+	+	9	5
+	+	10	5
+	+	5	64
+	+	6	54
+	+	44	0
+	+	36	0
+	+	53	0
+	+	34	96
+	+	22	126
+	+	33	6
+	+	48	18
+	+	48	0
+	+	33	0
+	+	33	6
+	+	22	80
+	+	23	0
+	+	23	0
+	+	22	80
+	+	23	0
+	+	30	58
+	+	31	11
+	+	30	70
+	+	33	7
+	+	33	0
+	+	33	25
+	+	46	41
+	+	47	35
+	+	48	0
+	+	47	34
+	+	24	40
+	+	28	40
+	+	22	86
+	+	28	31
+	+	29	31
+	+	30	31
+	+	25	45
+	+	28	0
+	+	27	45
+	+	32	0
+	+	31	8
+	+	32	8
+	+	32	8
+	+	32	77
+	+	32	67
+	+	33	0
+	+	32	21
+	+	25	35
+	+	47	31
+	+	22	88
+	+	32	0
+	+	33	0
+	+	51	29
+	+	53	0
+	+	52	2
+	+	38	89
+	+	39	55
+	+	18	76
+	+	37	1
+	+	40	1
+	+	18	0
+
+> ~/assign4/grading/dispatch.test
+	"	16	7
+
+> ~/assign4/grading/basic.test.out
+	"	56	0
+
+> ~/assign4/grading/basic.test.ou
+	"	1	0
+
+> ~/assign4/grading/basic.test
+	"	1	0
+
+> ~/assign4/ClassTable.java
+	"	202	23
+	^	201	68
+	.	201	67
+	+	318	0
+	+	305	30
+	+	12	23
+	+	187	21
+	+	189	36
+	+	189	0
+	+	178	3
+	+	178	50
+	+	188	0
+	+	178	0
+	+	188	4
+	+	311	2
+	+	307	0
+	+	304	104
+	+	311	33
+	+	310	46
+	+	313	43
+	+	316	0
+	+	317	16
+	+	318	0
+	+	313	24
+	+	313	41
+	+	314	19
+	+	313	52
+	+	307	1
+	+	314	0
+	+	313	0
+	+	308	2
+	+	307	0
+	+	315	27
+	+	317	13
+	+	291	0
+	+	290	39
+	+	318	0
+	+	319	0
+	+	321	0
+	+	204	66
+	+	204	58
+	+	291	35
+	+	294	0
+	+	296	0
+	+	294	4
+	+	297	36
+	+	298	7
+	+	299	6
+	+	300	4
+	+	310	0
+	+	309	3
+	+	312	0
+	+	313	0
+	+	295	0
+	+	297	0
+	+	11	33
+	+	12	0
+	+	192	0
+	+	206	37
+	+	219	25
+	+	228	55
+	+	242	38
+	+	242	0
+	+	242	31
+	+	242	30
+	+	242	30
+	+	242	11
+	+	242	0
+	+	10	30
+	+	173	61
+	+	174	22
+	+	175	38
+	+	176	39
+	+	177	40
+	+	204	76
+	+	206	46
+	+	291	0
+	+	290	0
+	+	174	34
+	+	228	71
+	+	320	0
+	+	319	0
+	+	319	0
+	+	238	0
+	+	239	30
+	+	240	25
+	+	241	0
+	+	204	54
+	+	212	82
+	+	212	31
+	+	204	0
+	+	197	0
+	+	194	0
+	+	212	0
+	+	229	1
+	+	231	1
+	+	232	32
+	+	217	0
+	+	203	8
+	+	202	23
+	+	203	0
+	+	202	15
+	+	201	67
+
+> ~/assign4/grading/selftypeparameterposition.test
+	"	1	0
+
+> ~/assign4/grading/cool-tree.java
+	"	1	0
+
+> ~/assign4/grading/badarith.test
+	"	1	0
+
+> ~/assign4/Makefile
+	"	60	0
+	^	28	17
+	.	28	16
+	+	29	9
+	+	28	16
+
+> ~/assign4/grading/dispatch.test.out
+	"	94	0
+
+> ~/assign4/grading/grading.test.out
+	"	1	0
+
+> ~/assign4/TreeConstants.java
+	"	65	0
+	^	83	44
+	.	83	43
+	+	83	47
+	+	84	44
+	+	81	41
+	+	83	43
+
+> garding/dispatch.test
+	"	1	0
+
+> ~/assign4/grading/newselftype.test.out
+	"	25	8
+
+> ~/assign4/grading/newselftype.test
+	"	1	0
+
 > ~/assign4/Node.java
-	"	15	4
+	"	129	0
 	^	118	54
 	.	118	53
 	+	57	30
@@ -364,307 +766,11 @@
 	+	122	20
 	+	118	53
 
-> ~/assign4/cool-tree.java
-	"	824	5
-	^	822	5
-	.	823	0
-	+	1344	40
-	+	1339	36
-	+	1340	35
-	+	1297	9
-	+	1298	8
-	+	1296	38
-	+	1297	35
-	+	1249	10
-	+	1247	11
-	+	1248	38
-	+	1249	38
-	+	1250	8
-	+	1253	42
-	+	1198	0
-	+	1198	10
-	+	1199	0
-	+	1198	0
-	+	1199	35
-	+	1203	42
-	+	1200	8
-	+	1149	0
-	+	1148	103
-	+	1151	8
-	+	1154	42
-	+	1020	0
-	+	1019	13
-	+	924	39
-	+	929	0
-	+	934	5
-	+	932	9
-	+	935	5
-	+	934	0
-	+	933	13
-	+	935	4
-	+	681	41
-	+	683	7
-	+	687	8
-	+	685	47
-	+	686	0
-	+	688	7
-	+	691	46
-	+	692	25
-	+	694	5
-	+	698	0
-	+	680	65
-	+	685	28
-	+	1022	0
-	+	1025	10
-	+	1022	24
-	+	1025	16
-	+	1024	7
-	+	1025	0
-	+	1025	0
-	+	1022	0
-	+	1017	1
-	+	1021	1
-	+	1029	0
-	+	1027	16
-	+	1028	12
-	+	1022	49
-	+	680	0
-	+	685	0
-	+	1438	5
-	+	1437	31
-	+	1439	16
-	+	1440	15
-	+	1441	14
-	+	1439	16
-	+	1440	16
-	+	1439	45
-	+	1440	44
-	+	1441	44
-	+	1079	12
-	+	1078	39
-	+	1079	14
-	+	1078	27
-	+	1080	0
-	+	1079	14
-	+	1080	0
-	+	1088	39
-	+	1087	7
-	+	1091	7
-	+	1089	137
-	+	1100	0
-	+	1105	25
-	+	805	61
-	+	807	39
-	+	809	6
-	+	811	31
-	+	812	107
-	+	813	5
-	+	826	2
-	+	826	0
-	+	815	52
-	+	816	43
-	+	817	110
-	+	816	44
-	+	818	0
-	+	822	4
-	+	823	0
-
-> ~/assign4/Methods.java
-	"	31	25
-	^	31	26
-	.	31	25
-	+	6	26
-	+	5	23
-	+	7	0
-	+	3	19
-	+	8	17
-	+	48	10
-	+	5	14
-	+	6	15
-	+	5	56
-	+	6	44
-	+	5	122
-	+	6	100
-	+	11	0
-	+	8	96
-	+	11	30
-	+	11	12
-	+	8	89
-	+	11	27
-	+	48	18
-	+	13	17
-	+	48	0
-	+	15	48
-	+	14	35
-	+	15	0
-	+	16	0
-	+	16	0
-	+	18	0
-	+	48	32
-	+	22	0
-	+	48	0
-	+	22	26
-	+	20	73
-	+	23	44
-	+	47	7
-	+	23	4
-	+	23	4
-	+	32	20
-	+	32	60
-	+	32	1
-	+	35	0
-	+	15	49
-	+	23	48
-	+	32	74
-	+	32	21
-	+	19	1
-	+	11	1
-	+	32	1
-	+	8	15
-	+	11	0
-	+	9	0
-	+	10	0
-	+	9	0
-	+	10	0
-	+	9	5
-	+	10	5
-	+	5	64
-	+	6	54
-	+	39	0
-	+	35	0
-	+	46	0
-	+	33	96
-	+	22	126
-	+	31	6
-	+	43	18
-	+	44	0
-	+	32	0
-	+	31	6
-	+	22	80
-	+	23	0
-	+	23	0
-	+	22	80
-	+	23	0
-	+	28	58
-	+	29	11
-	+	28	70
-	+	30	7
-	+	32	0
-	+	31	25
-
-> ~/assign4/ClassTable.java
-	"	260	5
-	.	208	0
-	+	184	3
-	+	180	0
-	+	182	0
-	+	182	0
-	+	180	27
-	+	181	27
-	+	182	29
-	+	183	28
-	+	184	0
-	+	311	0
-	+	298	30
-	+	12	23
-	+	187	21
-	+	189	36
-	+	189	0
-	+	178	3
-	+	178	50
-	+	188	0
-	+	178	0
-	+	188	4
-	+	304	2
-	+	300	0
-	+	297	104
-	+	304	33
-	+	303	46
-	+	306	43
-	+	309	0
-	+	310	16
-	+	311	0
-	+	306	24
-	+	306	41
-	+	307	19
-	+	306	52
-	+	300	1
-	+	307	0
-	+	306	0
-	+	301	2
-	+	300	0
-	+	308	27
-	+	310	13
-	+	284	0
-	+	283	39
-	+	311	0
-	+	312	0
-	+	314	0
-	+	200	66
-	+	200	58
-	+	284	35
-	+	287	0
-	+	289	0
-	+	287	4
-	+	290	36
-	+	291	7
-	+	292	6
-	+	293	4
-	+	303	0
-	+	302	3
-	+	305	0
-	+	306	0
-	+	288	0
-	+	290	0
-	+	11	33
-	+	12	0
-	+	192	0
-	+	202	37
-	+	215	25
-	+	224	55
-	+	235	38
-	+	235	0
-	+	235	31
-	+	235	30
-	+	235	30
-	+	235	11
-	+	235	0
-	+	10	30
-	+	173	61
-	+	174	22
-	+	175	38
-	+	176	39
-	+	177	40
-	+	200	76
-	+	202	46
-	+	284	0
-	+	283	0
-	+	174	34
-	+	224	71
-	+	313	0
-	+	312	0
-	+	312	0
-	+	231	0
-	+	232	30
-	+	233	25
-	+	234	0
-	+	200	54
-	+	208	82
-	+	208	31
-	+	200	0
-	+	197	0
-	+	194	0
-	+	208	0
+> ~/assign4/grading/Methods.java
+	"	1	0
 
 > ~/Methods.java
 	"	1	0
-
-> ~/assign4/out
-	"	1	0
-	.	1	0
-	+	1	0
-	+	1	0
-	+	1	0
 
 > ~/assign4/grading/scopes.test
 	"	8	0
@@ -686,13 +792,6 @@
 
 > ~/assign4/grading/letinit.test
 	"	1	0
-
-> ~/assign4/Makefile
-	"	101	0
-	^	28	17
-	.	28	16
-	+	29	9
-	+	28	16
 
 > ~/assign4/grading/methodnameclash.test
 	"	4	0
@@ -717,15 +816,6 @@
 
 > ~/assign4/grading/assignment.test
 	"	1	0
-
-> ~/assign4/TreeConstants.java
-	"	85	0
-	^	83	44
-	.	83	43
-	+	83	47
-	+	84	44
-	+	81	41
-	+	83	43
 
 > ~/assign4/grading/assignment.test.out
 	"	55	10
@@ -760,15 +850,6 @@
 > ~/assign4/grading/TreeConstants.java
 	"	1	0
 
-> ~/assign4/grading/cool-tree.java
-	"	1	0
-
-> ~/assign4/grading/basic.test.out
-	"	56	0
-
-> ~/assign4/grading/basic.test
-	"	1	0
-
 > ~/assign4/grading/basicclassestree.test.out
 	"	39	4
 
@@ -783,9 +864,6 @@
 
 > ~/assign4/grading/badarith.test.out
 	"	1	0
-
-> ~/assign4/grading/badarith.test
-	"	4	0
 
 > ~/assign4/SymbolTable.java
 	"	88	4
@@ -1053,73 +1131,3 @@
 
 > ~/assign4/makefile
 	"	1	0
-
-> ~/assign4/classTable.java
-	"	1	0
-
-> ~/compiler/cs143/cool/assignments/PA3J/Makefile
-	"	30	1
-	^	4	37
-	.	4	36
-	+	4	36
-
-> ~/compiler/cs143/cool/assignments/PA4J/Makefile
-	"	4	36
-	^	4	37
-	.	4	36
-	+	4	36
-
-> ~/compiler/cs143/cool/assignments/PA4J/cool-tree.java.SKEL
-	"	60	0
-
-> ~/cool.lex
-	"	109	1
-
-> ~/assignment2/cool.lex
-	"	83	34
-
-> ~/assignment2/Tokens*
-	"	1	0
-
-> ~/assignment3/grading/letinit.test
-	"	3	0
-
-> ~/assignment3/grading/letassociativity.test
-	"	4	0
-
-> ~/assignment3/grading/baddispatch4.test
-	"	1	0
-
-> ~/assignment3/baddispatch4.test
-	"	1	0
-
-> ~/assignment3/cool-tree.java
-	"	1665	4
-
-> ~/compiler/cs143/cool/assignments/PA2J/pa1-grading.pl
-	"	1	0
-
-> ~/assignment3/grading/assigngetstype.test.out
-	"	1	0
-
-> ~/assignment3/grading/assigngetstype.test
-	"	3	0
-
-> ~/assignment3/grading/assignseq.test
-	"	5	0
-
-> ~/assignment3/grading/assignseq.test.out
-	"	45	4
-
-> ~/assignment3/myparser
-	"	2	25
-	^	2	48
-	.	2	25
-	+	3	0
-	+	2	29
-	+	3	25
-	+	2	28
-	+	3	0
-	+	2	24
-	+	3	0
-	+	2	25

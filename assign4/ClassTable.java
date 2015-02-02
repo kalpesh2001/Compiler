@@ -197,6 +197,10 @@ class ClassTable {
       ListIterator<class_c>classIter = copyClass.listIterator();      
       while (classIter.hasNext()) {
         class_c element = classIter.next();
+        if(element.getName() == TreeConstants.SELF_TYPE) {
+         System.out.println("Class name cannot be SELF_TYPE exiting");
+         System.exit(1);
+        }
         Node<AbstractSymbol> treenode = coolTree.findNode(element.getParent()); 
           if (treenode != null) {
             treenode.addChild(element.getName()); 
@@ -222,7 +226,10 @@ public void addGlobal(Classes cls) {
    while (classIter.hasNext()) {
      class_c element = classIter.next();
      Node<AbstractSymbol> treenode = coolTree.findNode(element.getName()); 
+/*
      element.initialize(coolTree);
+*/
+    element.initialize(treenode);
    }
 }
 

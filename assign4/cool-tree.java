@@ -66,7 +66,7 @@ abstract class Feature extends TreeNode {
     }
     public abstract void dump_with_types(PrintStream out, int n);
     public abstract void initialize(Node<AbstractSymbol> node);
-    public abstract AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol>node);
+    public abstract AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol>node,AbstractSymbol classname);
     public abstract void addAttr(SymbolTable env,Node<AbstractSymbol>node);
 
 }
@@ -151,7 +151,7 @@ abstract class Expression extends TreeNode {
         else
             { out.println(Utilities.pad(n) + ": _no_type"); }
     }
-   public abstract AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node);
+   public abstract AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname);
 }
 
 
@@ -280,7 +280,6 @@ class programc extends Program {
            lookup.put(element.getName(),element);
         }
 /* Code to add attributes for each class in hierarchy go here */
-/* This may require hierarchy of classes and not of abstract symbol */
 /* Find ancestors of a class and execute method to add its attributes to the symbol table */
 /* addGlobal only calls for attributes */
 
@@ -289,13 +288,15 @@ class programc extends Program {
      LinkedList<Node<AbstractSymbol>> ancestors = node.ancestorList(node.findNode(element.getName()));
       for (Node<AbstractSymbol> eachname : ancestors) {
        env.enterScope();
-       /*System.out.println("Processing ancestor: " + eachname.getData() + lookup.get(eachname.getData()).getName());*/
        lookup.get(eachname.getData()).addAttr(env,node); 
        }
-       element.checkType(env,node);
+       element.checkType(env,node,element.getName());
+/*
+       We should pass Class table as parameter and also class as parameter. use following ideom to print error message.
+       classTable.semantError(element).print("This is test");
+*/
        env.exitScope();
    }	
-	/* some semantic analysis code may go here */
 
 	if (classTable.errors()) {
 	    System.err.println("Compilation halted due to static semantic errors.");
@@ -369,11 +370,11 @@ class class_c extends Class_ {
        }
     }
      
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
       env.enterScope();
       env.addId(name,(Object)name);
       for (Enumeration e = features.getElements(); e.hasMoreElements();) {
-	    ((Feature)e.nextElement()).checkType(env,node);
+	    ((Feature)e.nextElement()).checkType(env,node,classname);
         }
 /* If everything goes fine, return class name */
     return(name);
@@ -430,19 +431,22 @@ class method extends Feature {
  
   public void initialize(Node<AbstractSymbol> node) {
     boolean verify = true;
-    if(node.findNode(return_type) == null) verify = false;
- 
+/*    if(node.findNode(return_type) == null) verify = false; */
+
      LinkedList<AbstractSymbol>methodparam = new LinkedList<AbstractSymbol>();
      for (Enumeration e = formals.getElements();e.hasMoreElements();) {
            AbstractSymbol paramtype = ((formalc)e.nextElement()).getMethodType(); 
+           methodparam.add(paramtype);
+/*
            if (node.findNode(paramtype) != null) 
               methodparam.add(paramtype);
            else verify = false;
+*/
         }
      if (verify == true) {
      Methods methods = node.getMethod();
      methods.add(name,methodparam,return_type);
-     System.out.println("Add method: " + name.toString());
+     System.out.println("Add method: to class: " + name.toString() + node.getData().toString());
      }
     else 
       System.out.println("Method not added: " + name.toString());
@@ -451,13 +455,22 @@ class method extends Feature {
   public void addAttr(SymbolTable env,Node<AbstractSymbol> node) {
     }
    
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
      boolean verify = true;
      env.enterScope();
-     for (Enumeration e = formals.getElements();e.hasMoreElements();) 
-       if(((formalc)e.nextElement()).checkType(env,node) == TreeConstants.typeError) verify = false;
-
-     Node<AbstractSymbol> ret_node= node.findNode(expr.checkType(env,node));
+     env.addId(TreeConstants.self,(Object)classname);
+     for (Enumeration e = formals.getElements();e.hasMoreElements();){
+        AbstractSymbol parameter = ((formalc)e.nextElement()).checkType(env,node,classname);
+       if(parameter == TreeConstants.typeError) 
+         return(TreeConstants.typeError);
+       }
+   
+    if (expr.checkType(env,node,classname) == TreeConstants.SELF_TYPE) 
+      {
+       env.exitScope();
+        return(TreeConstants.SELF_TYPE);
+     }
+     Node<AbstractSymbol> ret_node= node.findNode(expr.checkType(env,node,classname));
      Node<AbstractSymbol> formal_return = node.findNode(return_type); 
      if (ret_node == null || formal_return == null) verify = false;
      if (verify && (ret_node.typeConform(formal_return))) {
@@ -511,7 +524,13 @@ class attr extends Feature {
     }
 
   public void addAttr(SymbolTable env,Node<AbstractSymbol>node) {
+/*
    System.out.println("Called to add: Type: variable Name " + type_decl.toString() + "......" + name.toString());
+*/
+   if (name == TreeConstants.self) {
+      System.out.println("Attribute 'self' cannot be added");
+      return;
+   }
    if(node.findNode(type_decl) != null) {
         if(env.lookup(name) != null) {
           System.out.println("Variable is already declared:" + name.getString());
@@ -525,13 +544,13 @@ class attr extends Feature {
    else 
       System.out.println("Type does not exist");
    }
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
 /* Add check for type_decl to be a valid class */
    if(node.findNode(type_decl) == null) { 
     System.out.println("Class: " + type_decl.toString() + "of variable: " + name.toString() + "not declared");
      return (TreeConstants.typeError);
    }
-    AbstractSymbol expr_ret = init.checkType(env,node);
+    AbstractSymbol expr_ret = init.checkType(env,node,classname);
      if(expr_ret == TreeConstants.No_type) return (type_decl);
      if(expr_ret == TreeConstants.typeError) return (TreeConstants.typeError);
     Node<AbstractSymbol> formal_node = node.findNode(type_decl);
@@ -584,7 +603,11 @@ class formalc extends Formal {
    public AbstractSymbol getMethodType() {
        return (type_decl);
    }
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
+     if(type_decl == TreeConstants.SELF_TYPE) {
+        System.out.println("Formal parameter cannot have SELF_TYPE");
+        return(TreeConstants.typeError);
+     }
      if(env.probe(name) != null || (node.findNode(type_decl) == null)) {
         System.out.println("Found method parameter already declared or declared type not found:" + name);
         return (TreeConstants.typeError);
@@ -675,13 +698,13 @@ class assign extends Expression {
 	dump_type(out, n);
     }
 
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
      AbstractSymbol formal_decl = (AbstractSymbol)env.lookup(name);
        if(formal_decl == TreeConstants.typeError || formal_decl == null) {
         set_type(TreeConstants.typeError);
         return(TreeConstants.typeError);
        }
-    AbstractSymbol expr_ret = expr.checkType(env,node);
+    AbstractSymbol expr_ret = expr.checkType(env,node,classname);
        if(expr_ret == TreeConstants.typeError) {
         set_type(TreeConstants.typeError);
          return (TreeConstants.typeError);
@@ -751,8 +774,57 @@ class static_dispatch extends Expression {
 	dump_type(out, n);
     }
 
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
-      return(TreeConstants.typeError);
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
+      AbstractSymbol called_class = expr.checkType(env,node,classname);
+      Node<AbstractSymbol> called_class_node = node.findNode(called_class);
+      Node<AbstractSymbol> static_class_node = node.findNode(type_name);
+     
+     if (!called_class_node.typeConform(static_class_node)) {
+       System.out.println("Type of invoked object does not conform to static type");
+       set_type(TreeConstants.typeError);
+       return(TreeConstants.typeError);
+      }
+         
+    /* Find method matching name 
+    /* for each parameter in the method make sure that supplied parameter Conforms to the method parameter.
+    */
+    AbstractSymbol ret_type;
+    LinkedList<AbstractSymbol> param = new LinkedList<AbstractSymbol>(); 
+    for (Enumeration e = actual.getElements(); e.hasMoreElements();) {
+     ret_type = ((Expression)e.nextElement()).checkType(env,node,classname);
+      if (ret_type != TreeConstants.typeError) 
+        param.add(ret_type); 
+      else 
+       {
+         System.out.println("One method parameter returned error: "  + name.toString() + ret_type.toString());
+         set_type(TreeConstants.typeError);
+         return(TreeConstants.typeError);
+       }
+      }
+    LinkedList<Node<AbstractSymbol>> ancestors = node.ancestorList(static_class_node);
+    Iterator<Node<AbstractSymbol>> reverse = ancestors.descendingIterator();
+
+    while(reverse.hasNext()) {
+    Node<AbstractSymbol> ancestor = reverse.next();
+/*
+    System.out.println("Trying to match methods for class:" + ancestor.getData()); 
+*/
+    Methods method_handle = ancestor.getMethod();
+
+    if (method_handle.methodExists(name) && (method_handle.checkCount(name) == actual.getLength()) && method_handle.validateSig(name,param,node)) { 
+         if (method_handle.findRet(name) == TreeConstants.SELF_TYPE) {
+            set_type(type_name); /* changed to type name as it will be higher in hierarchy than called class. Class class conforms to static class */
+            return(type_name);
+         }
+        else {
+          set_type(method_handle.findRet(name));
+          return(method_handle.findRet(name));
+         }
+      }
+    }
+    System.out.println("No matching method:" +" " + name.toString()+ " " + "found in the class hierarchy");
+    set_type(TreeConstants.typeError);
+    return(TreeConstants.typeError);
   }
 }
 
@@ -801,8 +873,10 @@ class dispatch extends Expression {
 	dump_type(out, n);
     }
 
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
-      AbstractSymbol called_class = expr.checkType(env,node);
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
+      AbstractSymbol called_class = expr.checkType(env,node,classname);
+     if (called_class == TreeConstants.No_type) 
+         called_class = classname;
       if (called_class == TreeConstants.typeError) {
       set_type(TreeConstants.typeError);
       return(TreeConstants.typeError);
@@ -811,20 +885,45 @@ class dispatch extends Expression {
     /* Find method matching name 
     /* for each parameter in the method make sure that supplied parameter Conforms to the method parameter.
     */
+    AbstractSymbol ret_type;
+    LinkedList<AbstractSymbol> param = new LinkedList<AbstractSymbol>(); 
+    for (Enumeration e = actual.getElements(); e.hasMoreElements();) {
+       ret_type = ((Expression)e.nextElement()).checkType(env,node,classname);
+        if (ret_type != TreeConstants.typeError) 
+          param.add(ret_type); 
+        else 
+          {
+            System.out.println("One method parameter returned error: "  + name.toString() + ret_type.toString());
+            set_type(TreeConstants.typeError);
+            return(TreeConstants.typeError);
+         }
+      }
     Node<AbstractSymbol> called_node = node.findNode(called_class);
-    Methods method_handle = called_node.getMethod();
-    if (!method_handle.methodExists(name))  {
-       System.out.println("Method: does not exist in class:" + name.toString() + " " + called_class.toString());
-      set_type(TreeConstants.typeError);
-      return(TreeConstants.typeError);
-     }
-    else  {
-     
-        for (Enumeration e = actual.getElements(); e.hasMoreElements();) {
-	    ((Expression)e.nextElement()).dump_with_types(out, n + 2);
-        }
-     
+    LinkedList<Node<AbstractSymbol>> ancestors = node.ancestorList(called_node);
+    Iterator<Node<AbstractSymbol>> reverse = ancestors.descendingIterator();
+
+    while(reverse.hasNext()) {
+    Node<AbstractSymbol> ancestor = reverse.next();
+/*
+    System.out.println("Trying to match methods for class:" + ancestor.getData()); 
+*/
+    Methods method_handle = ancestor.getMethod();
+
+    if (method_handle.methodExists(name) && (method_handle.checkCount(name) == actual.getLength()) && method_handle.validateSig(name,param,node)) { 
+         if (method_handle.findRet(name) == TreeConstants.SELF_TYPE) {
+            set_type(called_class);
+            return(called_class);
+         }
+        else {
+          set_type(method_handle.findRet(name));
+          return(method_handle.findRet(name));
+         }
+      }
     }
+    System.out.println("No matching method:" +" " + name.toString()+ " " + "found in the class hierarchy");
+    set_type(TreeConstants.typeError);
+    return(TreeConstants.typeError);
+  }
 }
 
 
@@ -867,10 +966,10 @@ class cond extends Expression {
 	else_exp.dump_with_types(out, n + 2);
 	dump_type(out, n);
     }
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
-      if (pred.checkType(env,node) != TreeConstants.Bool) return(TreeConstants.typeError);
-        AbstractSymbol then_type = then_exp.checkType(env,node);
-        AbstractSymbol else_type = else_exp.checkType(env,node);
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
+      if (pred.checkType(env,node,classname) != TreeConstants.Bool) return(TreeConstants.typeError);
+        AbstractSymbol then_type = then_exp.checkType(env,node,classname);
+        AbstractSymbol else_type = else_exp.checkType(env,node,classname);
         if (then_type == else_type) return (then_type);
 
         LinkedList<Node<AbstractSymbol>> cond = new LinkedList<Node<AbstractSymbol>>();
@@ -918,13 +1017,13 @@ class loop extends Expression {
 	body.dump_with_types(out, n + 2);
 	dump_type(out, n);
     }
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
-    if (pred.checkType(env,node) != TreeConstants.Bool) { 
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
+    if (pred.checkType(env,node,classname) != TreeConstants.Bool) { 
       System.out.println("Predicate for while loop does not return boolean"); 
       set_type(TreeConstants.typeError);
       return(TreeConstants.typeError);
      }
-    if (body.checkType(env,node) != TreeConstants.typeError) {
+    if (body.checkType(env,node,classname) != TreeConstants.typeError) {
       System.out.println("Body for while loop has error"); 
       set_type(TreeConstants.typeError);
       return(TreeConstants.typeError);
@@ -975,7 +1074,7 @@ class typcase extends Expression {
 	dump_type(out, n);
     }
 
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
       return(TreeConstants.typeError);
   }
 }
@@ -1013,7 +1112,7 @@ class block extends Expression {
 	dump_type(out, n);
     }
 
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
 /*
       Vector<Expression> all_expr = body.copyElements();
       set_type(all_expr.lastElement().checkType(env,node));
@@ -1021,7 +1120,7 @@ class block extends Expression {
 */
       AbstractSymbol ret = TreeConstants.typeError;
    for (Enumeration e = body.getElements(); e.hasMoreElements();) {
-	   ret =  ((Expression)e.nextElement()).checkType(env,node);
+	   ret =  ((Expression)e.nextElement()).checkType(env,node,classname);
            
     }
    set_type(ret);
@@ -1074,8 +1173,8 @@ class let extends Expression {
 	body.dump_with_types(out, n + 2);
 	dump_type(out, n);
     }
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
-    AbstractSymbol ret_type = init.checkType(env,node);
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname ) {
+    AbstractSymbol ret_type = init.checkType(env,node,classname);
     if(ret_type != TreeConstants.No_type) {
      Node<AbstractSymbol> ret_node= node.findNode(ret_type);
      Node<AbstractSymbol> formal_decl = node.findNode(type_decl); 
@@ -1094,7 +1193,7 @@ class let extends Expression {
         env.enterScope();
         env.addId(identifier,(Object)type_decl);
      }
-    AbstractSymbol return_type = body.checkType(env,node);
+    AbstractSymbol return_type = body.checkType(env,node,classname);
    if (return_type == TreeConstants.typeError) {
       env.exitScope();
       set_type(TreeConstants.typeError);
@@ -1144,8 +1243,8 @@ class plus extends Expression {
 	e2.dump_with_types(out, n + 2);
 	dump_type(out, n);
     }
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
-       if (e1.checkType(env,node) == TreeConstants.Int && e2.checkType(env,node) == TreeConstants.Int) {
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
+       if (e1.checkType(env,node,classname) == TreeConstants.Int && e2.checkType(env,node,classname) == TreeConstants.Int) {
            set_type(TreeConstants.Int); 
            return (TreeConstants.Int);
         }
@@ -1193,8 +1292,8 @@ class sub extends Expression {
 	e2.dump_with_types(out, n + 2);
 	dump_type(out, n);
     }
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
-       if (e1.checkType(env,node) == TreeConstants.Int && e2.checkType(env,node) == TreeConstants.Int) {
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
+       if (e1.checkType(env,node,classname) == TreeConstants.Int && e2.checkType(env,node,classname) == TreeConstants.Int) {
            set_type(TreeConstants.Int); 
            return (TreeConstants.Int);
         }
@@ -1243,8 +1342,8 @@ class mul extends Expression {
 	dump_type(out, n);
     }
 
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
-       if (e1.checkType(env,node) == TreeConstants.Int && e2.checkType(env,node) == TreeConstants.Int) {
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
+       if (e1.checkType(env,node,classname) == TreeConstants.Int && e2.checkType(env,node,classname) == TreeConstants.Int) {
            set_type(TreeConstants.Int); 
            return (TreeConstants.Int);
         }
@@ -1291,8 +1390,8 @@ class divide extends Expression {
 	e2.dump_with_types(out, n + 2);
 	dump_type(out, n);
     }
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
-       if (e1.checkType(env,node) == TreeConstants.Int && e2.checkType(env,node) == TreeConstants.Int) {
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
+       if (e1.checkType(env,node,classname) == TreeConstants.Int && e2.checkType(env,node,classname) == TreeConstants.Int) {
            set_type(TreeConstants.Int);
            return (TreeConstants.Int);
         }
@@ -1334,8 +1433,8 @@ class neg extends Expression {
 	e1.dump_with_types(out, n + 2);
 	dump_type(out, n);
     }
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
-       if (e1.checkType(env,node) == TreeConstants.Int) {
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
+       if (e1.checkType(env,node,classname) == TreeConstants.Int) {
            set_type(TreeConstants.Int);
            return (TreeConstants.Int);
         }
@@ -1384,8 +1483,8 @@ class lt extends Expression {
 	dump_type(out, n);
     }
 
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
-       if (e1.checkType(env,node) == TreeConstants.Int && e2.checkType(env,node) == TreeConstants.Int) {
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
+       if (e1.checkType(env,node,classname) == TreeConstants.Int && e2.checkType(env,node,classname) == TreeConstants.Int) {
            set_type(TreeConstants.Bool);
            return (TreeConstants.Bool);
          }
@@ -1432,9 +1531,9 @@ class eq extends Expression {
 	e2.dump_with_types(out, n + 2);
 	dump_type(out, n);
     }
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
-        AbstractSymbol ret1 = e1.checkType(env,node); 
-        AbstractSymbol ret2 = e2.checkType(env,node); 
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
+        AbstractSymbol ret1 = e1.checkType(env,node,classname); 
+        AbstractSymbol ret2 = e2.checkType(env,node,classname); 
       
        if ((ret1 == TreeConstants.Bool && ret2 != TreeConstants.Bool) || 
           (ret1 == TreeConstants.Int && ret2 != TreeConstants.Int) || 
@@ -1487,8 +1586,8 @@ class leq extends Expression {
 	dump_type(out, n);
     }
 
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
-       if (e1.checkType(env,node) == TreeConstants.Int && e2.checkType(env,node) == TreeConstants.Int) {
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
+       if (e1.checkType(env,node,classname) == TreeConstants.Int && e2.checkType(env,node,classname) == TreeConstants.Int) {
            set_type(TreeConstants.Bool);
             return (TreeConstants.Bool);
          }
@@ -1530,8 +1629,8 @@ class comp extends Expression {
 	e1.dump_with_types(out, n + 2);
 	dump_type(out, n);
     }
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
-       if (e1.checkType(env,node) == TreeConstants.Bool) {
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
+       if (e1.checkType(env,node,classname) == TreeConstants.Bool) {
            set_type(TreeConstants.Bool);
            return (TreeConstants.Bool);
         }
@@ -1575,7 +1674,7 @@ class int_const extends Expression {
 	dump_type(out, n);
     }
 
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
         set_type(TreeConstants.Int);
          return(TreeConstants.Int);
    }
@@ -1611,7 +1710,7 @@ class bool_const extends Expression {
 	dump_Boolean(out, n + 2, val);
 	dump_type(out, n);
     }
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
          set_type(TreeConstants.Bool);
          return(TreeConstants.Bool);
    }
@@ -1651,7 +1750,7 @@ class string_const extends Expression {
 	dump_type(out, n);
     }
 
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
          set_type(TreeConstants.Str);
          return(TreeConstants.Str);
    }
@@ -1688,7 +1787,7 @@ class new_ extends Expression {
 	dump_type(out, n);
     }
 
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
          if (node.findNode(type_name) != null ) {
            set_type(type_name);
             return(type_name);
@@ -1732,7 +1831,7 @@ class isvoid extends Expression {
 	dump_type(out, n);
     }
 
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
          set_type(TreeConstants.Bool);
          return(TreeConstants.Bool);
   }
@@ -1765,7 +1864,7 @@ class no_expr extends Expression {
 	dump_type(out, n);
     }
 
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
          set_type(TreeConstants.No_type);
          return(TreeConstants.No_type);
    }
@@ -1802,7 +1901,7 @@ class object extends Expression {
 	dump_type(out, n);
     }
 
-  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node) {
+  public AbstractSymbol checkType(SymbolTable env,Node<AbstractSymbol> node,AbstractSymbol classname) {
       if (env.lookup(name) != null) {
           set_type((AbstractSymbol)env.lookup(name));
           return((AbstractSymbol)env.lookup(name));
