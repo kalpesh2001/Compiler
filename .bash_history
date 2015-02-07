@@ -1,370 +1,3 @@
-more letbadinit.test.out
-vi letinit.test
-vi letinit.test.out
-vi letnoinit.test
-more letshadows.test
-more letshadows.test.out
-cd assign4/grading
-ls -al|more
-ls -l assign*
-more assignment.test.out
-cd ..
-vi out
-vi out
-vi Node.java
-ls
-vi cool-tree.java
-javac cool-tree.java
-vi cool-tree.java
-javac cool-tree.java
-make semant
-./mysemant_b grading/compare.test > out
-vi out
-diff grading/compare.test.out out|more
-diff grading/compare.test.out out|more
-  vi cool-tree.java
-make semant
-./mysemant_b grading/compare.test > out
-vi out
-diff grading/compare.test.out out|more
-./mysemant_b grading/comparisons.test > out
-vi out
-diff grading/comparisons.test.out out |more
-./mysemant_b grading/dupformals.test > out
-vi out
-./mysemant_b grading/expressionblock.test > out
-vi out
-diff grading/expressionblock.test.out out |more
-./mysemant_b grading/forwardinherits.test >out
-vi out
-vi out
-./mysemant_b grading/forwardinherits.test >out
-vi out
-vi out
-./mysemant_b grading/forwardinherits.test >out
-vi out
-./mysemant_b grading/forwardinherits.test >out
-vi out
-ls
-vi out
-diff grading/forwardinherits.test.out out|more
-./mysemant_b grading/if.test > out
-vi out
-vi ClassTable.java
-make semant
-./mysemant_b grading/if.test > out
-vi out
-vi cool-tree.java
-./mysemant_b grading/missingclass.test > out
-vi out
-./mysemant_b grading/methodnameclash.test > out
-vi out
-diff grading/methodnameclash.test.out out|more
-vi cool-tree.java
-javac cool-tree.java
-
-vi Makefile
-make semant
-./mysemant_b grading/letbadinit.test > out
-vi out
-./mysemant_b grading/letinit.test > out
-vi out
-diff grading/letinit.test.out out|more
-./mysemant_b grading/letnoinit.test > out
-vi out
-diff grading/letnoinit.test.out out|more
-./mysemant_b grading/letshadows.test > out
-vi out
-cd assign4
-vi cool-tree.java
-javac cool-tree.java
-make semant
-./mysemant_b grading/assignment.test > out
-vi out
-vi cool-tree.java
-vi cool-tree.java
-vi cool-tree.java
-make semant
-./mysemant_b grading/assignment.test > out
-vi out
-vi TreeConstants.java
-./mysemant_b grading/assignment.test > out
-vi out
-vi cool-tree.java
-make semant
-./mysemant_b grading/assignment.test > out
-vi out
-./mysemant_b grading/compare.test > out
-vi out
-
-./mysemant_b grading/assignment.test > out
-vi out
-diff out grading/assignment.test.out |more
-ls
-vi cool-tree.java
-vi ClassTable.java
-make semant
-vi ClassTable.java
-
-vi ClassTable.java
-make semant
-vi ClassTable.java
-make semant
-ls -lt
-cd assign4
-vi ClassTable.java
-cd grading
-cd assign4/grading
-ls -l m*
-ls -l n*
-more neg.test
-vi nomain.tets
-vi nomain.test
-vi nomain.test.out
-ls -l|more
-vi scopes.test
-vi scopes.test
-more simplearith.test
-ls -lt|more
-more strigtest.test
-more stringtest.test
-cd assign4
-ls
-./mysemant_b grading/neg.test > out
-vi out
-./mysemant_b grading/simplearith.test >out
-vi out
-diff out grading/simplearith.test.out out|more
-diff out grading/simplearith.test.out|more
-vi cool-tree.java
-vi Methods.java
-cd assign4
-ls
-vi Methods.java
-ls
-cd assign4
-ls
-vi cool-tree.java
-cd assign4
-vi ClassTable.java
-vi cool-tree.java
-vi cool-tree.java
-ls -al|more
-ls -al|more
-more .cool-tree.java.swp
-vi cool-tree.java
-ls -lt cool-tree.java
-ls -lt semant
-cp cool-tree.java_012915
-cp cool-tree.java cool-tree_012915.jav
-vi cool-tree.java
-cd assign4
-vi Node.java
-cd assign4
-vi Node.java
-vi Methods.java
-javac Methods.java
-vi Methods.java
-javac Methods.java
-vi Methods.java
-ls
-git init
-git add .
-git commit -m 'Initial commit'
-git config --global kalpesh97@yahoo.com
-git config --global user.email "kalpesh97@yahoo.com"
-git commit -m 'Initial commit'
-git commit -help
-git commit -m 'Initial commit'
-git config --global user.name "Kalpesh Patel"
-git commit -m 'Initial commit'
-cd
-git commit -m 'Initial commit'
-ls -al
-git remote add origin https://github.com/kalpesh2001/compiler.git
-git pull origin master
-git push origin master
-ls
-cd assign4
-ls
-vi Methods.java
-javac Methods.java
-vi Methods.java
-vi Methods.java
-javac Methods.java
-vi cool-tree.java
-javac cool-tree.java
-vi cool-tree.java
-exit
-ls -l
-cd workspace
-ls
-cd ..
-ls
-cd assign4
-ls
-vi Node.java
-vi Methods.java
-cd assign4
-vi cool-tree.java
-javac cool-tree.java
-javac cool-tree.java
-vi cool-tree.java
-javac cool-tree.java
-make semant
-./mysemant_b grading/dispatch.test > out
-vi out
-./mysemant_b grading/basic.test > out
-vi out
-vi ClassTable.java
-more out
-  exit
-cd assign4
-vi Methods.java
-javac Methods.java
-vi Methods.java
-javac Methods.java
-vi Methods.java
-vi cool-tree.java
-more ClassTable.java
-vi ClassTable.java
-cd grading
-cd assign4/grading
-ls
-more dispatch.test
-ls -ls
-ls -lt|more
- more *.test
-more basic.test
-more basic.test.out
-vi basic.test
-cd assign4/grading
-vi basic.test.out
-vi basic.test
-vi cool-tree.java
-cd assign4
-vi Methods.java
-vi dispatch.test
-ls
-cd assign4
-ls
-vi out
-vi ClassTable.java
-vi cool-tree.java
-make semant
-./mysemant_b grading/basic.test > out
-vi out
-vi Methods.java
-vi Methods.java
-vi cool-tree.java
-make semant
-./mysemant_b grading/basic.test > out
-vi out
-./mysemant_b grading/basic.test > out
-vi out
-cd assign4
-vi Methods.java
-make semant
-./mysemant_b grading/basic.test > out
-vi out
-vi TreeConstants.java
-vi Methods.java
-make semant
-./mysemant_b grading/basic.test > out
-vi out
-vi ClassTable.java
-make semant
-cd assign4
-ls
-vi out
-vi ClassTable.java
-more grading/dispatch.test
-ls -lt
-cd grading
-ls -lt|more
-vi newselftype.test
-more newselftype.test.out
-vi newselftype.test
-
-vi newselftype.test.out
-cd assign4
-vi out
-vi Node.java
-cd grading
-vi newselftype.test
-ls -lt new*
-ls -lt|more
-more self-asignment.test
-more self-assignment.test
-more self-assignment.test.out
-ls -lt|more
-  more initwithself.test
-  more initwithself.test.out
-  more initwithself.test
-  more initwithself.test.out
-  more initwithself.test
-ls -lt|more
-more letself.test
-more letself.test.out
-ls -lt|more
-more selftype*
-ls -l assing*
-ls -l assign*
-more assign*
-more dispatch*
-more dispatch*
-ls
-cd assign
-cd assign4
-ls
-vi cool-tree.java
-javac cool-tree.java
-vi cool-tree.java
-javac cool-tree.java
-vi cool-tree.java
-javac cool-tree.java
-vi cool-tree.java
-javac cool-tree.java
-make
-make semant
-./mysemant_b grading/basic.test > out
-vi out
-diff out grading/basic.test.out
-vi out
-./mysemant_b grading/dispatch.test > out
-vi out
-cd assign4
-ls
-vi cool-tree.java
-javac cool-tree.java
-javac cool-tree.java
-make
-make semant
-./mysemant_b grading/dispatch.test > out
-vi out
-diff out grading/dispatch.test.out |more
-diff out grading/dispatch.test.out |more
-more grading/dispatch.test
-more grading/dispatch.test.out
-ls
-cd assign4
-ls
-vi TreeConstants.java
-vi cool-tree.java
-cd assign4/grading
-ls
-vi basic.test
-vi dispatch.test
-vi dispatch.test
-cd assign4
-vi TreeConstants.java
-cd grading
-vi grading.test.out
-vi dispatch.test.out
-vi dispatch.test
-cd assign4/grading
-vi dispatch.test
-cd assign4
 ls
 vi cool-tree.java
 
@@ -498,3 +131,370 @@ vi cool-tree.java
 make semant
 vi cool-tree.java
 vi cool-tree.java
+cd grading
+ls
+cd assign4/grading
+ls
+vi dispatch.test
+vi basic.test
+vi basic.test.ou
+vi basic.test.out
+ls -l|more
+more static*
+ls -lt static*
+ls -lt dispatch.test
+vi dispatch.test
+ls -lt|more
+ more override*
+ ls -l over*
+vi overrideingmethod2.test
+vi overridingmethod2.test
+vi overridingmethod3.test
+vi overridingmethod3.test.out
+vi overridingmethod4.test.out
+vi overridingmethod4.test
+vi overridingmethod4.test
+vi overridingmethod.test
+vi overridingmethod.test.out
+ls -l|more
+more tricky*
+more tricky*
+ls -l static*
+vi static*.test
+vi static*.test
+ls -lt|more
+more trickydispatch.test
+more trickyatdispatch.test
+more trickyatdispatch.test.out
+more trickyatdispatch2.test
+ls
+cd
+git commit -m "changes on Feb 1, 2015"
+git push
+git status
+git status|more
+git add
+git add .
+git status|more
+git commit -m "Chnages of Feb 1, 2015"
+git remote -v
+git push origin master
+exit
+cd assign4
+vi cool-tree.java
+make semant
+./mysemant_b grading/basic.test > out
+vi out
+diff out grading/basic.test.out|more
+vi cool-tree.java
+make semant
+./mysemant_b grading/dispatch.test > out
+vi out
+diff out grading/dispatch.test.out|more
+./mysemant_b grading/overriderenamearg.test > out
+vi out
+diff grading/overriderenamearg.test out|more
+diff grading/overriderenamearg.test.out out|more
+./mysemant_b grading/overridingmethod2.test
+./mysemant_b grading/overridingmethod2.test > out
+vi out
+diff grading/overridingmethod2.test.out out
+diff grading/overridingmethod2.test.out out|more
+./mysemant_b grading/overridingmethod3.test > out
+vi out
+./mysemant_b grading/overridingmethod4.test > out
+vi out
+./mysemant_b grading/overridingmethod.test > out
+vi out
+diff grading/overridingmethod.test out
+diff grading/overridingmethod.test.out out
+diff grading/overridingmethod.test.out out|more
+vi cool-tree.java
+ls -l .swp*
+ls -al|more
+rm .cool-tree.java.swp
+vi cool-tree.java
+make semant
+vi cool-tree.java
+make semant
+./mysemant_b grading/staticdispatch.test > out
+vi out
+diff grading/staticdispatch.test.out out
+diff grading/staticdispatch.test.out out|more
+ ls -lt|more
+./mysemant_b grading/trickyatdispatch.test > out
+viout
+vi out
+diff grading/trickyatdispatch.test.out out|more
+diff grading/trickyatdispatch.test.out out|more
+./mysemant_b grading/trickyatdispatch2.test > out
+vi out
+cd assign4
+vi Methods.java
+vi Node.java
+cd assign4
+ls
+ls -l mysemant
+more mysemant
+cd grading
+ls
+more mysemant
+ls -l /bin/csh
+cd RESULTS
+ls -lt|more
+cd test-output
+ls
+more *.out
+cd ..
+ls
+cd ..
+ls
+ls
+cd assign4
+ls
+cd grading
+ls -l|more
+more dupformals.test
+more dupformals.test.out
+more if.test
+more if.test.out
+more if.test
+more if.test
+more if.test.out
+ls -l while*
+ls -l|more
+ls -l|more
+more badwhilebody.test
+more badwhilebody.test.out
+more badmethodcallsitself.test
+more badmethodcallsitself.test.out
+more badmethodcallsitself.test
+ls -l|more
+more inheritsbool.test
+more inheritsbool.test.out
+more inheritsobject.test
+more inheritsObject.test
+more inheritsObject.test.out
+more inheritsObject.test
+ls -lt|more
+more methodnameclash.test
+more methodnameclash.test.out
+more methodnameclash.test
+ls -l attr*
+more attroverride.test
+more attroverride.test.out
+cd assign4
+./mysemant_b grading/dupformals.test > out
+vi out
+./mysemant_b grading/if.test > out
+vi out
+diff grading/if.test.out out |more
+./mysemant_b grading/badwhilebody.test > out
+vi out
+./mysemant_b grading/badmethodcallsitself.test > out
+vi out
+./mysemant_b grading/inheritsbool.test
+./mysemant_b grading/inheritsbool.test > out
+vi out
+./mysemant_b grading/inheritsObject.test > out
+vi out
+diff out grading/inheritsObject.test.out
+diff out grading/inheritsObject.test.out|more
+./mysemant_b grading/methodnameclash.test > out
+vi out
+diff out grading/methodnameclash.test.out out|more
+diff out grading/methodnameclash.test.out|more
+./mysemant_b grading/methodnameclash.test > out
+vi out
+./mysemant_b grading/attroverride.test > out
+vi out
+cd assign4
+ls
+vi cool-tree.java
+cd assign4
+ls
+vi cool-tree.java
+cd assign4
+ls
+vi Node.java
+jjj:q!
+clea
+clear
+cd assign4
+vi cool-tree.java
+cd assign4
+vi cool-tree.java
+make semant
+./mysemant_b grading/methodnameclash.test > out
+vi out
+vi cool-tree.java
+make semant
+./mysemant_b grading/methodnameclash.test > out
+vi ou
+vi out
+./mysemant_b grading/methodnameclash.test > out
+vi out
+vi cool-tree.java
+make semant
+./mysemant_b grading/methodnameclash.test > out
+vi out
+exit
+cd assign4
+ls
+vi Node.java
+cd grading
+ls
+ls -lt|more
+vi dupformals.test
+ls -lt|more
+more methodnameclash.test
+cd grading
+ls
+cd assign4/grading
+ls
+vi methodnameclash.test
+ls -lt attroverride.test
+vi  attroverride.test
+cd assign4
+vi cool-tree.java
+javac cool-tree.java
+vi cool-tree.java
+javac cool-tree.java
+vi cool-tree.java
+javac cool-tree.java
+vi cool-tree.java
+javac cool-tree.java
+vi cool-tree.java
+javac cool-tree.java
+make semant
+./mysemant_b grading/methodnameclash.test > out
+vi out
+vi cool-tree.java
+vi ClassTable.java
+cd assign4
+vi ClassTable.java
+cd assign4
+vi cool-tree.java
+vi cool-tree.java
+
+vi cool-tree.java
+vi cool-tree.java
+vi cool-tree.java
+vi cool-tree.java
+vi cool-tree.java
+cd assign4
+cd grading
+ls
+more assignnoconform.test.out
+more assignnoconform.test
+more if.test
+more if.test
+vi if.test
+vi if.test.out
+vi if.test.out
+vi if.test
+cd assign4
+ls
+vi cool-tree.java
+make semant
+./mysemant_b grading/methodnameclash.test > out
+vi out
+vi cool-tree.java
+make semant
+./mysemant_b grading/methodnameclash.test > out
+vi cool-tree.java
+vi cool-tree.java
+javac cool-tree.java
+make semant
+make semant
+make semant
+make semant
+make semant
+./mysemant_b grading/anattributenamedself.test > out
+vi out
+make semant
+./mysemant_b grading/anattributenamedself.test > out
+vi out
+./mysemant_b grading/assignmentnoconform.test 
+./mysemant_b grading/assignnoconform.test
+make semant
+./mysemant_b grading/anattributenamedself.test > out
+./mysemant_b grading/methodnameclash.test > out
+vi out
+diff out grading/methodnamec
+vi Node.java
+make semant
+make semant
+diff out grading/if.test > out
+vi out
+./mysemant_b grading/if.test > out
+vi out
+diff out grading/if.test.out|more
+vi out
+make semant
+./mysemant_b grading/if.test > out
+vi out
+make semant
+./mysemant_b grading/if.test > out
+vi out
+make semant
+./mysemant_b grading/if.test > out
+cd assign4
+ls
+ls -lt cool-tree.java
+vi cool-tree.java
+vi out
+exit
+cd assign4
+ls
+vi cool-tree.jav
+vi cool-tree.java
+make semant
+./mysemant_b grading/if.test > out
+vi out
+vi out
+diff out grading/if.test.out|more
+cd assign4
+ls
+vi cool-tree.java
+cd assign4
+ls
+vi cool-tree.java
+make semant
+cd assign4
+vi cool-tree.java
+vi cool-tree.java
+./mysemant_b grading/simplecase.test > out
+vi out
+diff out grading/simplecase.test.out|more
+cd assign4
+make semant
+more Node.java
+make semant
+cd grading
+ls
+more simplecase.test
+more simplecase.test.out
+more simplecase.test
+ls *case*
+more caseidenticalbranch.test
+more caseidenticalbranch.test.out
+cd ..
+ls
+cd ..
+ls
+cd ..
+ls
+cd action
+ls
+cd compiler
+ls
+cd cs143
+ls
+cd assignments
+ls
+cd PA5J
+ls
+more README.SKEL
+  ls -lt
+more CgenNode.java.*

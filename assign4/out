@@ -1,38 +1,10 @@
-Added class with parent:Main Object
-Added class with parent:A Object
-Added class with parent:B Object
-Added class with parent:C Object
-Node: IO
-Node: Int
-Node: Bool
-Node: String
-Node: Main
-Node: A
-Node: B
-Node: C
-Add method: to class: mainMain
-Add method: to class: inkyA
-Add method: to class: winkyB
-Add method: to class: binkyC
-Add method: to class: abortObject
-Add method: to class: type_nameObject
-Add method: to class: copyObject
-Add method: to class: out_stringIO
-Add method: to class: out_intIO
-Add method: to class: in_stringIO
-Add method: to class: in_intIO
-Add method: to class: lengthString
-Add method: to class: concatString
-Add method: to class: substrString
-Type of invoked object does not conform to static type
-Type of invoked object does not conform to static type
 #1
 _program
   #1
   _class
     Main
     Object
-    "grading/trickyatdispatch2.test"
+    "grading/simplecase.test"
     (
     #1
     _method
@@ -47,51 +19,51 @@ _program
   _class
     A
     Object
-    "grading/trickyatdispatch2.test"
+    "grading/simplecase.test"
     (
     #1
-    _method
-      inky
-      Int
+    _attr
+      moo
+      Object
       #1
-      _int
-        1
-      : Int
-    )
-  #1
-  _class
-    B
-    Object
-    "grading/trickyatdispatch2.test"
-    (
+      _no_expr
+      : _no_type
     #1
     _method
-      winky
-      Int
+      boo
+      Object
       #1
-      _int
-        2
-      : Int
-    )
-  #1
-  _class
-    C
-    Object
-    "grading/trickyatdispatch2.test"
-    (
-    #1
-    _method
-      binky
-      Int
-      #1
-      _static_dispatch
+      _block
         #1
-        _new
-          A
-        : A
-        B
-        winky
-        (
-        )
-      : typeerror
+        _typcase
+          #1
+          _object
+            moo
+          : Object
+          #1
+          _branch
+            i
+            Int
+            #1
+            _object
+              i
+            : Int
+          #1
+          _branch
+            b
+            Bool
+            #1
+            _object
+              b
+            : Bool
+          #1
+          _branch
+            s
+            String
+            #1
+            _object
+              s
+            : String
+        : Object
+      : Object
     )
